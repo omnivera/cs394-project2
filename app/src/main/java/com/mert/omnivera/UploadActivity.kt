@@ -14,20 +14,20 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.mert.omnivera.databinding.ActivityFeedBinding
+import com.mert.omnivera.databinding.ActivityUploadBinding
 import java.util.*
 
 class UploadActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFeedBinding
+    private lateinit var binding: ActivityUploadBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFeedBinding.inflate(layoutInflater)
+        binding = ActivityUploadBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        
+
     }
 
 

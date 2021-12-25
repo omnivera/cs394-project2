@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.mert.omnivera.databinding.ActivityFeedBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityFeedBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityFeedBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
 
         

@@ -1,7 +1,10 @@
 package com.mert.omnivera
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,4 +14,21 @@ class MainActivity : AppCompatActivity() {
 
         
     }
+
+
+    fun signInClicked(view : View) {
+
+
+
+
+
+    }
+
+    fun signUpClicked(view : View) {
+
+
+
+
+    }
+
 }

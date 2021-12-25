@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/passwordText"
         android:layout_width="373dp"
         android:layout_height="62dp"
         android:layout_marginTop="15dp"
@@ -16,10 +16,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/userEmailText" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/userEmailText"
         android:layout_width="373dp"
         android:layout_height="62dp"
         android:layout_marginTop="70dp"
@@ -35,10 +35,11 @@
         android:layout_width="377dp"
         android:layout_height="55dp"
         android:layout_marginTop="15dp"
+        android:onClick="signInClicked"
         android:text="SIGN IN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 
     <TextView
         android:id="@+id/textView"
@@ -55,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:onClick="signUpClicked"
         android:text="SIGN UP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

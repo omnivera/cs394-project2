@@ -24,6 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        val currentUser = auth.currentUser
+
+        if (currentUser != null) {
+            val intent = Intent(applicationContext, FeedActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         
     }
@@ -32,6 +40,26 @@ class MainActivity : AppCompatActivity() {
     fun signInClicked(view : View) {
 
 
+
+        val userEmail = binding.userEmailText.text.toString()
+        val password = binding.passwordText.text.toString()
+
+        if (userEmail.isNotEmpty() && password.isNotEmpty()) {
+            auth.signInWithEmailAndPassword(userEmail,password).addOnCompleteListener { task ->
+
+                if (task.isSuccessful) {
+                    //Signed In
+                    Toast.makeText(applicationContext,"Welcome: ${auth.currentUser?.email.toString()}",Toast.LENGTH_LONG).show()
+                    val intent = Intent(applicationContext, FeedActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }
+
+            }.addOnFailureListener { exception ->
+                Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+            }
+        }
 
 
 

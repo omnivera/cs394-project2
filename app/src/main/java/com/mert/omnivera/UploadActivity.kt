@@ -18,6 +18,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.mert.omnivera.databinding.ActivityUploadBinding
@@ -30,7 +34,9 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     var selectedPicture : Uri? = null
-   
+    private lateinit var db : FirebaseFirestore
+    private lateinit var auth : FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,10 @@ class UploadActivity : AppCompatActivity() {
         setContentView(view)
 
         registerLauncher()
+
+
+        auth = Firebase.auth
+        db = Firebase.firestore
 
 
     }
@@ -65,7 +75,46 @@ class UploadActivity : AppCompatActivity() {
 
     fun uploadClicked (view: View) {
 
+        val uuid = UUID.randomUUID()
+        val imageName = "$uuid.jpg"
 
+        val storage = Firebase.storage
+        val reference = storage.reference
+        val imagesReference = reference.child("images").child(imageName)
+
+        if (selectedPicture != null) {
+            imagesReference.putFile(selectedPicture!!).addOnSuccessListener { taskSnapshot ->
+
+                val uploadedPictureReference = storage.reference.child("images").child(imageName)
+                uploadedPictureReference.downloadUrl.addOnSuccessListener { uri ->
+                    val downloadUrl = uri.toString()
+                    println(downloadUrl)
+
+                    val postMap = hashMapOf<String,Any>()
+                    postMap.put("downloadUrl",downloadUrl)
+                    postMap.put("userEmail",auth.currentUser!!.email.toString())
+                    postMap.put("comment",binding.uploadCommentText.text.toString())
+                    postMap.put("date",Timestamp.now())
+
+
+                    db.collection( "Posts").add(postMap).addOnCompleteListener{task ->
+
+                        if (task.isComplete && task.isSuccessful) {
+                            //back
+                            finish()
+
+                        }
+
+                    }.addOnFailureListener{exception ->
+                        Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+                    }
+
+
+                }
+
+            }
+
+        }
 
 
 

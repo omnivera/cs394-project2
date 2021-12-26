@@ -30,7 +30,7 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     var selectedPicture : Uri? = null
-    var selectedBitmap : Bitmap? = null
+   
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,24 +79,10 @@ class UploadActivity : AppCompatActivity() {
                 val intentFromResult = result.data
                 if (intentFromResult != null) {
                     selectedPicture = intentFromResult.data
-                    try {
-                        if (Build.VERSION.SDK_INT >= 28) {
-                            val source = ImageDecoder.createSource(
-                                this@UploadActivity.contentResolver,
-                                selectedPicture!!
-                            )
-                            selectedBitmap = ImageDecoder.decodeBitmap(source)
-                            binding.uploadImageView.setImageBitmap(selectedBitmap)
-                        } else {
-                            selectedBitmap = MediaStore.Images.Media.getBitmap(
-                                this@UploadActivity.contentResolver,
-                                selectedPicture
-                            )
-                            binding.uploadImageView.setImageBitmap(selectedBitmap)
-                        }
-                    } catch (e: IOException) {
-                        e.printStackTrace()
+                    selectedPicture.let {
+                        binding.uploadImageView.setImageURI(it)
                     }
+
                 }
             }
         }

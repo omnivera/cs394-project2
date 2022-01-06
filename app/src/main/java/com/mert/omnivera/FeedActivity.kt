@@ -5,14 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.mert.omnivera.databinding.ActivityFeedBinding
+import com.mert.omnivera.model.Post
 
 class FeedActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityFeedBinding
     private lateinit var auth : FirebaseAuth
+    private lateinit var db : FirebaseFirestore
+    val postArrayList : ArrayList<Post> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +28,42 @@ class FeedActivity : AppCompatActivity() {
         setContentView(view)
 
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
+        getDataFromFirestore()
+
+    }
+
+    fun getDataFromFirestore() {
+
+        db.collection("Posts").orderBy("date",
+            Query.Direction.DESCENDING).addSnapshotListener { value, error ->
+            if (error != null) {
+                Toast.makeText(applicationContext,error.localizedMessage, Toast.LENGTH_LONG).show()
+            } else {
+
+                if (value != null) {
+                    if (!value.isEmpty) {
+
+                        postArrayList.clear()
+
+                        val documents = value.documents
+                        for (document in documents) {
+                            val comment = document.get("comment") as String
+                            val useremail = document.get("userEmail") as String
+                            val downloadUrl = document.get("downloadUrl") as String
+
+
+                            val post = Post(useremail,comment, downloadUrl)
+                            postArrayList.add(post)
+                        }
+
+
+                    }
+                }
+
+            }
+        }
 
     }
 

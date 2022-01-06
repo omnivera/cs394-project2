@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="top|center"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="400dp"
-        android:layout_height="350dp"
-        app:cardElevation="10dp"
+        android:layout_height="400dp"
+        app:cardElevation="5dp"
         app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
+
         >
 
 

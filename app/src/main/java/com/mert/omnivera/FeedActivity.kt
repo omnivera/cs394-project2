@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.mert.omnivera.adapter.FeedRecyclerAdapter
 import com.mert.omnivera.databinding.ActivityFeedBinding
 import com.mert.omnivera.model.Post
 
@@ -19,6 +21,7 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var db : FirebaseFirestore
     val postArrayList : ArrayList<Post> = ArrayList()
+    var adapter : FeedRecyclerAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +34,12 @@ class FeedActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         getDataFromFirestore()
+
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        adapter = FeedRecyclerAdapter(postArrayList)
+        binding.recyclerView.adapter = adapter
 
     }
 
@@ -58,6 +67,7 @@ class FeedActivity : AppCompatActivity() {
                             postArrayList.add(post)
                         }
 
+                        adapter!!.notifyDataSetChanged()
 
                     }
                 }

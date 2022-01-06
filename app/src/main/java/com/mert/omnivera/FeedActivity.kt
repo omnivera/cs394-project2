@@ -105,7 +105,7 @@ class FeedActivity : AppCompatActivity() {
         }else if (item.itemId == R.id.weather) {
 
 
-            val intent = Intent(applicationContext, WeatherActivity::class.java)
+            val intent = Intent(applicationContext, CryptoActivity::class.java)
             startActivity(intent)
 
         }

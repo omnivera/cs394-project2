@@ -1,6 +1,5 @@
 package com.mert.omnivera.service
 
-import com.mert.omnivera.model.WeatherModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

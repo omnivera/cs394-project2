@@ -1,6 +1,5 @@
 package com.mert.omnivera.service
 
-import com.mert.omnivera.model.WeatherModel
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

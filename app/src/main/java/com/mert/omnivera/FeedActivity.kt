@@ -102,6 +102,12 @@ class FeedActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
+        }else if (item.itemId == R.id.weather) {
+
+
+            val intent = Intent(applicationContext, WeatherActivity::class.java)
+            startActivity(intent)
+
         }
 
         return super.onOptionsItemSelected(item)

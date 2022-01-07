@@ -29,7 +29,7 @@ class CryptoActivity : AppCompatActivity(),CryptoRecyclerAdapter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crypto)
 
-
+        compositeDisposable = CompositeDisposable()
 
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this)
         cryptoView.layoutManager = layoutManager
@@ -51,6 +51,10 @@ class CryptoActivity : AppCompatActivity(),CryptoRecyclerAdapter.Listener {
 
 
 
+        compositeDisposable?.add(retrofit.getData()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::handleResponse))
 
 
 

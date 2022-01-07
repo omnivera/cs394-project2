@@ -34,8 +34,8 @@
 
         <ImageView
             android:id="@+id/recyclerImageView"
-            android:layout_width="350dp"
-            android:layout_height="220dp"
+            android:layout_width="380dp"
+            android:layout_height="320dp"
             android:layout_gravity="center"
             android:paddingTop="5dp"
             tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />

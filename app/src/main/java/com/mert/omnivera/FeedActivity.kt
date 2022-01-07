@@ -102,7 +102,7 @@ class FeedActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
-        }else if (item.itemId == R.id.weather) {
+        }else if (item.itemId == R.id.crypto) {
 
 
             val intent = Intent(applicationContext, CryptoActivity::class.java)

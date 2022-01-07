@@ -32,7 +32,7 @@ class CryptoActivity : AppCompatActivity() {
             .build().create(CryptoAPI::class.java)
 
 
-        
+
 
 
 
